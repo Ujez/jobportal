@@ -55,4 +55,8 @@ class ListingController extends Controller
 
         return redirect()->to($listing->apply_link);
     }
+    public function create()
+    {
+        return view('listings.create');
+    }
 }
