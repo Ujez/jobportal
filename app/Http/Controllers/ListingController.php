@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Listing;
 use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class ListingController extends Controller
 {
@@ -46,8 +41,18 @@ class ListingController extends Controller
 
         return view('listings.index', compact('listings', 'tags'));
     }
-       public function show(Listing $listing, Request $request)
+    public function show(Listing $listing, Request $request)
     {
         return view('listings.show', compact('listing'));
+    }
+    public function apply(Listing $listing, Request $request)
+    {
+        $listing->clicks()
+            ->create([
+                'user_agent' => $request->userAgent(),
+                'ip' => $request->ip(),
+            ]);
+
+        return redirect()->to($listing->apply_link);
     }
 }
