@@ -154,4 +154,33 @@
             </form>
         </div>
     </section>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            classes: {
+                base: 'StripeElement rounded-md shadow-sm bg-white px-2 py-3 border border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full'
+            }
+        });
+
+        cardElement.mount('#card-element');
+
+        document.getElementById('form_submit').addEventListener('click', async (e) => {
+            // prevent the submission of the form immediately
+            e.preventDefault();
+
+            const { paymentMethod, error } = await stripe.createPaymentMethod(
+                'card', cardElement, {}
+            );
+
+            if (error) {
+                alert(error.message);
+            } else {
+                // card is ok, create payment method id and submit form
+                document.getElementById('payment_method_id').value = paymentMethod.id;
+                document.getElementById('payment_form').submit();
+            }
+        })
+    </script>
 </x-app-layout>

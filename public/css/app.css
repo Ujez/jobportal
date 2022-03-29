@@ -1086,6 +1086,10 @@ select {
   padding-top: 6rem;
   padding-bottom: 6rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
