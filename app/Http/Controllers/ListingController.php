@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Support\Str;
 
 class ListingController extends Controller
@@ -73,14 +73,14 @@ class ListingController extends Controller
             'location' => 'required',
             'apply_link' => 'required|url',
             'content' => 'required',
-            'payment_method_id' => 'required'
+            'payment_method_id' => 'required',
         ];
 
         if (!Auth::check()) {
             $validationArray = array_merge($validationArray, [
                 'email' => 'required|email|unique:users',
                 'password' => 'required|confirmed|min:5',
-                'name' => 'required'
+                'name' => 'required',
             ]);
         }
 
@@ -93,7 +93,7 @@ class ListingController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
             ]);
 
             $user->createAsStripeCustomer();
@@ -122,21 +122,20 @@ class ListingController extends Controller
                     'apply_link' => $request->apply_link,
                     'content' => $md->text($request->input('content')),
                     'is_highlighted' => $request->filled('is_highlighted'),
-                    'is_active' => true
+                    'is_active' => true,
                 ]);
 
-            foreach(explode(',', $request->tags) as $requestTag) {
+            foreach (explode(',', $request->tags) as $requestTag) {
                 $tag = Tag::firstOrCreate([
-                    'slug' => Str::slug(trim($requestTag))
+                    'slug' => Str::slug(trim($requestTag)),
                 ], [
-                    'name' => ucwords(trim($requestTag))
+                    'name' => ucwords(trim($requestTag)),
                 ]);
 
                 $tag->listings()->attach($listing->id);
             }
-
-            return redirect()->route('dashboard');
-        } catch(\Exception $e) {
+            return redirect()->route('dashboard')->with('message', 'You have posted a job Successfully');
+        } catch (\Exception$e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }

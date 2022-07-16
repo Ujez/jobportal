@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,18 +16,22 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\ListingController::class, 'index'])
     ->name('listings.index');
-    
+
 Route::get('/new', [Controllers\ListingController::class, 'create'])
     ->name('listings.create');
 
 Route::post('/new', [Controllers\ListingController::class, 'store'])
     ->name('listings.store');
 
-    Route::get('/dashboard', function (\Illuminate\Http\Request $request) {
-        return view('dashboard', [
-            'listings' => $request->user()->listings
-        ]);
-    })->middleware(['auth'])->name('dashboard');;
+Route::get('/dashboard', function (\Illuminate\Http\Request$request) {
+    return view('dashboard', [
+        'listings' => $request->user()->listings,
+    ]);
+})->middleware(['auth'])->name('dashboard');
+
+Route::get('newsletter', [NewsletterController::class, 'create']);
+
+Route::post('newsletter/store', [NewsletterController::class, 'store']);
 
 require __DIR__ . '/auth.php';
 
