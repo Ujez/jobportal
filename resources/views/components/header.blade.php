@@ -7,7 +7,7 @@
                 viewBox="0 0 24 24">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span class="ml-3 text-xl">Laravel Job Board</span>
+            <span class="ml-3 text-xl">Laravel Job Portal</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <a href="{{ route('login') }}" class="mr-5 hover:text-gray-900">Employers</a>
