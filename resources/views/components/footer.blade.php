@@ -7,7 +7,7 @@
             <span class="ml-3 text-xl">Laravel Job Portal</span>
         </a>
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-            by <a href="https://project-spa.vercel.app" class="hover:text-gray-900" target="_blank" rel="noopener">@ujez</a> &mdash; with <a href="https://github.com/ujez" class="hover:text-gray-900" target="_blank" rel="noopener">Isaac</a>
+            by <a href="https://github.com/ujez" class="hover:text-gray-900" target="_blank" rel="noopener">@ujez</a> &mdash; with <a href="https://github.com/ujez" class="hover:text-gray-900" target="_blank" rel="noopener">Isaac</a>
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a href="https://github.com/ujez" target="_blank" rel="noopener" class="text-gray-500 hover:text-gray-900">
