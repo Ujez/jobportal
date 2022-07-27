@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 
 Route::get('/', [Controllers\ListingController::class, 'index'])
     ->name('listings.index');
@@ -32,6 +34,7 @@ Route::get('/dashboard', function (\Illuminate\Http\Request$request) {
 Route::get('newsletter', [NewsletterController::class, 'create']);
 
 Route::post('newsletter/store', [NewsletterController::class, 'store']);
+Route::post('newsletter/store', [NewsletterController::class, 'addNews']);
 
 require __DIR__ . '/auth.php';
 
