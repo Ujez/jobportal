@@ -46,6 +46,5 @@
             {{ $listings->links() }}
         </div>
     </section> 
-pt>
     
 </x-app-layout>
