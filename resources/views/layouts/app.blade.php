@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="css/app.css">
 
     <!-- Scripts -->
     <script src="js/app.js" defer></script>
@@ -31,20 +31,20 @@
 
 <body class="font-sans antialiased">
     <div class="font-sans text-grey-900 antialiased">
+        <x-botman></x-botman>
         <x-header></x-header>
         {{ $slot }}
+        <div class="p-6 flex container md:w-2/3 xl:w-auto mx-auto xl:items-stretch justify-between">
 
-        <div class="p-6 container md:w-2/3 xl:w-auto mx-auto xl:items-stretch justify-between">
-
-            <div class="w-full xl:w-1/2 xl:py-28">
+            <div class="w-full xl:w-1/2 xl:py-24">
                 <h1
-                    class="text-2xl md:text-4xl xl:text-5xl font-bold leading-10 text-gray-800 mb-4 text-center  md:mt-0 mt-4">
+                    class="text-2xl md:text-4xl xl:text-5xl font-bold leading-10 text-gray-800 mb-4  md:mt-0 mt-4">
                     Subscribe</h1>
-                <p class="text-base leading-normal text-gray-600  text-center xl:text-left"> Subscribe
+                <p class="text-base leading-normal text-gray-600"> Subscribe
                     to your newsletter to stay in the loop. Our newsletter is sent once in
                     a week on every friday so subscribe to get latest news and updates.
                 <form method="post" action="{{ url('newsletter/store') }}">
-                    {{-- @csrf --}}
+                    @csrf
                     <div class="flex items-stretch mt-12">
                         <input name="email"
                             class="bg-gray-100 rounded-lg rounded-r-none dark:bg-gray-800 text-base

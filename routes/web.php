@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BotManController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +19,22 @@ use Illuminate\Support\Facades\Route;
  */
 
 
-Route::get('/', [Controllers\ListingController::class, 'index'])
-    ->name('listings.index');
 
-Route::get('/new', [Controllers\ListingController::class, 'create'])
+Route::get('/', [ListingController::class, 'index'])
+    ->name('listings.index');
+Route::match( ['get', 'post'], '/botman', [BotManController::class, 'handle']);
+// Route::post('/botman', [BotManController::class, 'handle'])
+//     ->name('listings.index');
+
+Route::get('/new', [ListingController::class, 'create'])
     ->name('listings.create');
 
-Route::post('/new', [Controllers\ListingController::class, 'store'])
+Route::post('/new', [ListingController::class, 'store'])
     ->name('listings.store');
+
+Route::get('/listing/edit', [ListingController::class, 'editIndex'])->name('listings.demo');
+Route::get('/listing/edit/{id}', [ListingController::class, 'Edit'])->name('listings.edit');
+Route::post('/listing/update/{id}', [ListingController::class, 'Update']);
 
 Route::get('/dashboard', function (\Illuminate\Http\Request$request) {
     return view('dashboard', [
@@ -38,8 +49,8 @@ Route::post('newsletter/store', [NewsletterController::class, 'addNews']);
 
 require __DIR__ . '/auth.php';
 
-Route::get('/{listing}', [Controllers\ListingController::class, 'show'])
+Route::get('/{listing}', [ListingController::class, 'show'])
     ->name('listings.show');
 
-Route::get('/{listing}/apply', [Controllers\ListingController::class, 'apply'])
+Route::get('/{listing}/apply', [ListingController::class, 'apply'])
     ->name('listings.apply');
